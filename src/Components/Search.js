@@ -3,20 +3,31 @@ import Table from "./Table";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [category, setCategory] = useState('');
   const [products, setProducts] = useState([]);
+
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
 
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
 
+ 
   const searchProducts = async () => {
     
     try {
-     //Api  from fakesite   
-      const response = await fetch(`https://fakestoreapi.com/products?q=${searchTerm}`);
+     //Api  from fakesite 
+     let url = `https://fakestoreapi.com/products/?`;
+     if (searchTerm) url += `q=${searchTerm}&`;
+     if (category) {
+      url += `category=${category}&`;
+    }
+     
+      const response = await fetch(url);
       const data = await response.json();
       console.log('search',data);
       setProducts(data);
@@ -40,6 +51,16 @@ const SearchBar = () => {
       />
 
 
+      <select value={category} onChange={handleCategoryChange}>
+
+        <option value="">Search Categories</option>
+        <option value="electronics">electronics</option>
+        <option value="jewelery">jewelery</option>
+        <option value="clothing">men's clothing</option>
+        <option value="wclothing">women's clothing</option>
+        {/* Add more category options as needed */}
+      </select>
+  
 
       <button onClick={searchProducts}>Search</button>
 
