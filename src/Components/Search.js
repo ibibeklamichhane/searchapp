@@ -26,7 +26,7 @@ const SearchBar = () => {
   };
 
   //removing word sensitivity by converting into lower case
-  const Products = products.filter((product) =>
+  const filteredProducts = products.filter((product) =>
   product.title.toLowerCase().includes(searchTerm.toLowerCase())
 );
 
@@ -43,14 +43,7 @@ const SearchBar = () => {
 
       <button onClick={searchProducts}>Search</button>
 
-      <ul>
-        {Products.map((product) => (
-          <li key={product.id}>{product.price}</li>
-          
-
-
-        ))}
-      </ul> 
+      {<Table products={filteredProducts}  style={{ border: '1px solid red' }}/>}
     </div>
   );
 };
@@ -67,3 +60,5 @@ export default SearchBar;
 
         ))}
       </ul> */}
+
+ {/* */}
