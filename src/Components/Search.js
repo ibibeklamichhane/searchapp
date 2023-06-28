@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import Modal from 'react-modal';
 import Table from "./Table";
 
 const SearchBar = () => {
@@ -6,6 +7,8 @@ const SearchBar = () => {
   const [priceRange, setPriceRange] = useState('');
   const [category, setCategory] = useState('');
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
 
   const handleInputChange = (event) => {
@@ -21,11 +24,18 @@ const SearchBar = () => {
   const handlePriceRangeChange = (event) => {
     setPriceRange(event.target.value);
   };
+  const handleSearchClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
  
   const searchProducts = async () => {
     
     try {
-     //Api  from fakesite 
+     //Api  from fakestore
      let url = `https://fakestoreapi.com/products/`;
 
     //category change product are fetched 
@@ -78,11 +88,29 @@ const SearchBar = () => {
     <div>
       <input
         type="text"
-        placeholder="Search products..."
+        placeholder="click to search..."
         value={searchTerm}
         onChange={handleInputChange}
       />
 
+      <button onClick={handleSearchClick}>Search</button>
+
+ {/* model launch to display popup */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={handleCloseModal}
+        shouldCloseOnEsc={true}
+        shouldCloseOnOverlayClick={true}
+      >
+
+      <input
+          type="text"
+          
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
+        
 
       <select value={category} onChange={handleCategoryChange}>
 
@@ -108,6 +136,7 @@ const SearchBar = () => {
 
        {/* tabulated format  product rakeko*/}
       {<Table products={filteredProducts}  style={{ border: '1px solid red' }}/>}
+      </Modal>
     </div>
   );
 };
@@ -116,13 +145,3 @@ const SearchBar = () => {
 export default SearchBar;
 
 
- {/*    <ul>
-        {filteredProducts.map((product) => (
-          <li key={product.id}>{product.price}</li>
-          
-
-
-        ))}
-      </ul> */}
-
- {/* */}
