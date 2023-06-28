@@ -1,5 +1,7 @@
 import React, { useState} from 'react';
+
 import Modal from 'react-modal';
+
 import Table from "./Table";
 
 const SearchBar = () => {
@@ -102,7 +104,8 @@ const SearchBar = () => {
         shouldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
       >
-
+      
+      
       <input
           type="text"
           
@@ -110,8 +113,10 @@ const SearchBar = () => {
           value={searchTerm}
           onChange={handleInputChange}
         />
+       
         
-
+        
+      
       <select value={category} onChange={handleCategoryChange}>
 
         <option value="">Search Categories</option>
@@ -134,8 +139,29 @@ const SearchBar = () => {
 
       <button onClick={searchProducts}>Search</button>
 
-       {/* tabulated format  product rakeko*/}
-      {<Table products={filteredProducts}  style={{ border: '1px solid red' }}/>}
+       {/* tabulated format  product display*/}
+       {isModalOpen && (
+        <div
+          style={{
+            border: '1px solid black',
+            padding: 'px',
+            marginTop: '10px',
+            marginBottom: '10px',
+          }}
+        >
+          <p style={{ textAlign: 'left', margin: '0' }}> ↑↓ to navigate   ↲ to select   'Esc' to Exit</p>
+        </div>
+      )}
+       {filteredProducts.map((product) => (
+          <div key={product.id}>
+            <h5>{product.title.slice(0, 40)}</h5>
+            <p>Price: ${product.price}</p>
+            <p>Description: {product.description.slice(0, 80)}...</p>
+            <hr />
+            
+          </div>
+          
+        ))}
       </Modal>
     </div>
   );

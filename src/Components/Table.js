@@ -3,7 +3,7 @@ const Table = ({ products }) => {
     <table>
       <tbody>
         <tr>
-          <th>Title</th>
+          <th>Title</th> 
           <th>Description</th>
           <th>Price</th>
         </tr>
@@ -12,7 +12,9 @@ const Table = ({ products }) => {
             <td>{product.title.substring(0, 35)}</td> {/* title size reduced to fist 35 words */}
             <td>{product.description.substring(0, 35)}</td>
             <td>{product.price}</td>
+            
           </tr>
+          
         ))}
       </tbody>
     </table>
