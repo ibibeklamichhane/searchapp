@@ -87,15 +87,21 @@ const SearchBar = () => {
 );
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="click to search..."
-        value={searchTerm}
-        onChange={handleInputChange}
-      />
+    <div className="container d-flex align-items-center justify-content-center" >
+      <div className=" center-block">
+    
+        <input  className='text-align:center'
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
+    </div>
 
-      <button onClick={handleSearchClick}>Search</button>
+
+
+     
+      <button type="button" class="btn btn-success col-sm-1" onClick={handleSearchClick} style={{ marginLeft: '10px' }}><i class="fa fa-search"></i></button>
 
  {/* model launch to display popup */}
       <Modal
@@ -137,8 +143,10 @@ const SearchBar = () => {
         <option value="above500">Above $500</option>
       </select>
 
-      <button onClick={searchProducts}>Search</button>
-
+       {/* <button onClick={searchProducts}>Search</button> */}
+      
+      <button type="button" class="btn btn-secondary search-button" onClick={searchProducts}style={{ marginLeft: '10px' }} >Search</button>
+      
        {/* tabulated format  product display*/}
        {isModalOpen && (
         <div
